@@ -12,6 +12,7 @@
     var ncmb = new NCMB(appKey, clientKey);
     var UTdata = ncmb.DataStore("UpdateTest");
     var key = "score";
+
     function enterData() {
       var uTdata = new UTdata();
       var value = parseInt($("#data").val());
@@ -28,6 +29,7 @@
         $("#display").html("enter fail");
       })
     }
+    
     function fetchAll() {
       UTdata.fetchAll()
       .then(function(results){
@@ -46,6 +48,7 @@
         $("#display").html("delete fail:" + JSON.stringify(error));
       })
     }
+
     function deleteData() {
     UTdata.fetch()
     .then(function(uTdata){
@@ -81,8 +84,21 @@
         $("#display").html("update fail:" + JSON.stringify(error));
       })
     }
+
     function countData() {
+      UTdata.count().fetchAll()
+      .then(function(results){
+        $("#display").removeClass();
+        $("#display").addClass("bg-success");
+        $("#display").html(results.count);
+      })
+      .catch(function(error){
+        $("#display").removeClass();
+        $("#display").addClass("bg-warning");
+        $("#display").html("count fail:" + JSON.stringify(error));
+      })
     }
+
     function sortData() {
     }
     </script>
